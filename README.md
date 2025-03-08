@@ -17,3 +17,9 @@ Você foi contratado para desenvolver um sistema de gestão de pedidos para uma 
 - Atualizar status do pedido (**Pendente, Processando, Enviado, Concluído**).  
 - Listar pedidos do usuário autenticado.  
 - Apenas administradores podem visualizar todos os pedidos.
+
+## **Desafio Extra (Diferencial para Pleno/Sênior)**  
+- Implementar **Swagger** para documentação da API.  
+- Criar testes unitários usando `xUnit` e `Moq`.  
+- Criar um **endpoint de relatório** que retorna o faturamento total do mês.  
+- Configurar um **cache Redis** para otimizar requisições de produtos. 
