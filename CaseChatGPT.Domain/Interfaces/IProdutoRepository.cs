@@ -1,4 +1,4 @@
-﻿using CaseChatGPT.Domain.Entites;
+﻿using CaseChatGPT.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
