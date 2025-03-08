@@ -1,4 +1,4 @@
-﻿using CaseChatGPT.Domain.Entites;
+﻿using CaseChatGPT.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

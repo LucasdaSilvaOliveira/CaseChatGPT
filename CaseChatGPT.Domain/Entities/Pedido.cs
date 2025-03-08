@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaseChatGPT.Domain.Entites
+namespace CaseChatGPT.Domain.Entities
 {
     public class Pedido
     {
