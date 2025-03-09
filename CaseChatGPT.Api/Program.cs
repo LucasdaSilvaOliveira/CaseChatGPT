@@ -1,3 +1,6 @@
+using AutoMapper;
+using CaseChatGPT.App.Mappings;
+using CaseChatGPT.App.UseCases;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Extensions;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +15,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfraDependencies(builder.Configuration);
+
+// CONFIG AUTO MAPPER
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new ProdutoProfile());
+});
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+// ==================
+
+builder.Services.AddScoped<ProdutoUseCases>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
          .AddEntityFrameworkStores<BancoContext>()
