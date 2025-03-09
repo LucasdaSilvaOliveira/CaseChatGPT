@@ -11,8 +11,8 @@ namespace CaseChatGPT.Domain.Interfaces
     {
         Task<IEnumerable<Produto>> GetProdutos();
         Task<Produto> GetProdutoById(int id);
-        Task<Produto> AddProduto(Produto produto);
-        Task<Produto> UpdateProduto(Produto produto);
-        Task<Produto> DeleteProduto(int id);
+        void AddProduto(Produto produto);
+        void UpdateProduto(Produto produto);
+        void DeleteProduto(Produto produto);
     }
 }
