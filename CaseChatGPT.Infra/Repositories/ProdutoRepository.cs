@@ -29,12 +29,6 @@ namespace CaseChatGPT.Infra.Repositories
             _context.SaveChanges();
         }
 
-        public void DeleteProduto(Produto produto)
-        {
-            _context.Produtos.Remove(produto);
-            _context.SaveChanges();
-        }
-
         public async Task<Produto> GetProdutoById(int id)
         {
             var produto = await _context.Produtos.FindAsync(id);
@@ -51,7 +45,20 @@ namespace CaseChatGPT.Infra.Repositories
 
         public void UpdateProduto(Produto produto)
         {
+            if (produto == null ||
+                 produto.Nome == null ||
+                 produto.Descricao == null ||
+                 produto.Preco == 0) throw new Exception("Produto não pode ser nulo");
+
             _context.Produtos.Update(produto);
+            _context.SaveChanges();
+        }
+
+        public void DeleteProduto(int id)
+        {
+            var produto = _context.Produtos.Find(id);
+            if (produto == null) throw new Exception("Produto não encontrado");
+            _context.Produtos.Remove(produto);
             _context.SaveChanges();
         }
     }

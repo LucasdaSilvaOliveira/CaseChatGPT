@@ -30,12 +30,12 @@ namespace CaseChatGPT.App.UseCases
 
         public void UpdateProduto(Produto produto)
         {
-            throw new NotImplementedException();
+            _produtoRepository.UpdateProduto(produto);
         }
 
-        public void DeleteProduto(Produto produto)
+        public void DeleteProduto(int id)
         {
-            throw new NotImplementedException();
+            _produtoRepository.DeleteProduto(id);
         }
     }
 }

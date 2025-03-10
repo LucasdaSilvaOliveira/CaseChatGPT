@@ -8,6 +8,6 @@ namespace CaseChatGPT.Domain.Interfaces.UseCases
         Task<Produto> GetProdutoById(int id);
         void AddProduto(Produto produto);
         void UpdateProduto(Produto produto);
-        void DeleteProduto(Produto produto);
+        void DeleteProduto(int id);
     }
 }

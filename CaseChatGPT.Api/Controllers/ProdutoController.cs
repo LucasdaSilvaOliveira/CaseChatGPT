@@ -55,5 +55,40 @@ namespace CaseChatGPT.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduto(int id, [FromBody] ProdutoDTO newProduto)
+        {
+            try
+            {
+                var produto = await _produtoUseCase.GetProdutoById(id);
+                produto.Id = id;
+                produto.Nome = newProduto.Nome;
+                produto.Preco = newProduto.Preco;
+                produto.Descricao = newProduto.Descricao;
+                produto.Estoque = newProduto.Estoque;
+
+                _produtoUseCase.UpdateProduto(produto);
+                return Ok("Produto atualizado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduto(int id)
+        {
+            try
+            {
+                _produtoUseCase.DeleteProduto(id);
+                return Ok("Produto deletado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
