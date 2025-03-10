@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaseChatGPT.Domain.Interfaces
+namespace CaseChatGPT.Domain.Interfaces.UseCases
 {
-    public interface IProdutoRepository
+    public interface IProdutoUseCases
     {
         Task<IEnumerable<Produto>> GetProdutos();
         Task<Produto> GetProdutoById(int id);

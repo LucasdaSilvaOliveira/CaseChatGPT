@@ -1,4 +1,8 @@
-﻿using CaseChatGPT.App.UseCases;
+﻿using AutoMapper;
+using CaseChatGPT.App.DTOs.Produto;
+using CaseChatGPT.App.UseCases;
+using CaseChatGPT.Domain.Entities;
+using CaseChatGPT.Domain.Interfaces.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaseChatGPT.Api.Controllers
@@ -6,24 +10,50 @@ namespace CaseChatGPT.Api.Controllers
     [Route("api/[controller]")]
     public class ProdutoController : ControllerBase
     {
-        private readonly ProdutoUseCases _produtoUseCase;
-        public ProdutoController(ProdutoUseCases produtoUseCase)
+        private readonly IProdutoUseCases _produtoUseCase;
+        private readonly IMapper _mapper;
+        public ProdutoController(IProdutoUseCases produtoUseCase, IMapper mapper)
         {
             _produtoUseCase = produtoUseCase;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var produtos = await _produtoUseCase.GetProdutos();
-            return Ok(produtos);
+            var produtosDTO = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
+            return Ok(produtosDTO);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetProduto(int id)
-        //{
-        //    var produto = await _produtoRepository.GetProdutoById(id);
-        //    return Ok(produto);
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduto(int id)
+        {
+            try
+            {
+                var produto = await _produtoUseCase.GetProdutoById(id);
+                var produtoDTO = _mapper.Map<ProdutoDTO>(produto);
+                return Ok(produto);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddProduto([FromBody] CriarProdutoDTO produtoDTO)
+        {
+            try
+            {
+                var produto = _mapper.Map<Produto>(produtoDTO);
+                _produtoUseCase.AddProduto(produto);
+                return Ok("Produto criado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

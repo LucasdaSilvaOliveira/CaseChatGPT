@@ -1,26 +1,41 @@
-﻿using AutoMapper;
-using CaseChatGPT.App.DTOs.Produto;
-using CaseChatGPT.Domain.Interfaces;
+﻿using CaseChatGPT.Domain.Entities;
+using CaseChatGPT.Domain.Interfaces.Repositories;
+using CaseChatGPT.Domain.Interfaces.UseCases;
 
 namespace CaseChatGPT.App.UseCases
 {
-    public class ProdutoUseCases
+    public class ProdutoUseCases : IProdutoUseCases
     {
         private readonly IProdutoRepository _produtoRepository;
-        private readonly IMapper _mapper;
-        public ProdutoUseCases(IProdutoRepository produtoRepository, IMapper mapper)
+        public ProdutoUseCases(IProdutoRepository produtoRepository)
         {
             _produtoRepository = produtoRepository;
-            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ObterProdutosDTO>> GetProdutos()
+        public async Task<IEnumerable<Produto>> GetProdutos()
         {
             var produtos = await _produtoRepository.GetProdutos();
+            return produtos;
+        }
+        public async Task<Produto> GetProdutoById(int id)
+        {
+            var produto = await _produtoRepository.GetProdutoById(id);
+            return produto;
+        }
 
-            var produtosDTO = _mapper.Map<IEnumerable<ObterProdutosDTO>>(produtos);
+        public void AddProduto(Produto produto)
+        {
+            _produtoRepository.AddProduto(produto);
+        }
 
-            return produtosDTO;
+        public void UpdateProduto(Produto produto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteProduto(Produto produto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

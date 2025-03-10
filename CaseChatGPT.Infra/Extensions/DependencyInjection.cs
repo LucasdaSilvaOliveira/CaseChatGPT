@@ -1,4 +1,4 @@
-﻿using CaseChatGPT.Domain.Interfaces;
+﻿using CaseChatGPT.Domain.Interfaces.Repositories;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;

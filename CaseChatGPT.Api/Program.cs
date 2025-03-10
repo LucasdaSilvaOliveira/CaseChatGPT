@@ -1,6 +1,7 @@
 using AutoMapper;
 using CaseChatGPT.App.Mappings;
 using CaseChatGPT.App.UseCases;
+using CaseChatGPT.Domain.Interfaces.UseCases;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Extensions;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +26,7 @@ IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 // ==================
 
-builder.Services.AddScoped<ProdutoUseCases>();
+builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
          .AddEntityFrameworkStores<BancoContext>()

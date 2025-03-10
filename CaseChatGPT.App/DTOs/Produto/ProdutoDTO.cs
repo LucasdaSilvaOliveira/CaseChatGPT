@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CaseChatGPT.App.DTOs.Produto
 {
-    public class ObterProdutosDTO
+    public class ProdutoDTO
     {
         public int Id { get; set; }
         public string Nome { get; set; }

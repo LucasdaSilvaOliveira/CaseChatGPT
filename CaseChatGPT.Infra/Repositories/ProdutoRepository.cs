@@ -1,5 +1,5 @@
 ﻿using CaseChatGPT.Domain.Entities;
-using CaseChatGPT.Domain.Interfaces;
+using CaseChatGPT.Domain.Interfaces.Repositories;
 using CaseChatGPT.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +20,11 @@ namespace CaseChatGPT.Infra.Repositories
 
         public void AddProduto(Produto produto)
         {
+            if (produto == null ||
+                produto.Nome == null ||
+                produto.Descricao == null ||
+                produto.Preco == 0) throw new Exception("Produto não pode ser nulo");
+
             _context.Produtos.Add(produto);
             _context.SaveChanges();
         }
@@ -34,7 +39,7 @@ namespace CaseChatGPT.Infra.Repositories
         {
             var produto = await _context.Produtos.FindAsync(id);
 
-            if (produto == null) throw new NullReferenceException("Produto não encontrado");
+            if (produto == null) throw new Exception("Produto não encontrado");
             return produto;
         }
 
