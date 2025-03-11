@@ -2,11 +2,6 @@
 using CaseChatGPT.Domain.Interfaces.Repositories;
 using CaseChatGPT.Infra.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaseChatGPT.Infra.Repositories
 {

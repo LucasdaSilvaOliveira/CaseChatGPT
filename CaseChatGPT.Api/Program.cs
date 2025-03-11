@@ -28,12 +28,12 @@ builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
 
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-//         .AddEntityFrameworkStores<BancoContext>()
-//         .AddDefaultTokenProviders();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+         .AddEntityFrameworkStores<BancoContext>()
+         .AddDefaultTokenProviders();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<BancoContext>();
+//builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+//    .AddEntityFrameworkStores<BancoContext>();
 
 var app = builder.Build();
 
@@ -47,8 +47,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapSwagger().RequireAuthorization();
-app.MapIdentityApi<IdentityUser>();
+//app.MapSwagger().RequireAuthorization();
+//app.MapIdentityApi<IdentityUser>();
 
 app.UseAuthorization();
 
