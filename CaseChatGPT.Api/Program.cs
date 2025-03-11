@@ -1,6 +1,7 @@
 using AutoMapper;
 using CaseChatGPT.App.Mappings;
 using CaseChatGPT.App.UseCases;
+using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Domain.Interfaces.UseCases;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Extensions;
@@ -32,15 +33,23 @@ builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
 builder.Services.AddScoped<IPedidoUseCases, PedidoUseCases>();
 builder.Services.AddScoped<IUsuarioUseCases, UsuarioUseCases>();
 
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-//         .AddEntityFrameworkStores<BancoContext>()
-//         .AddDefaultTokenProviders();
+builder.Services.AddIdentity<Usuario, IdentityRole>()
+         .AddEntityFrameworkStores<BancoContext>()
+         .AddDefaultTokenProviders();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<BancoContext>();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Default Lockout settings.
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+});
+
+//builder.Services.AddIdentityApiEndpoints<Usuario>()
 
 var app = builder.Build();
 
+//    .AddEntityFrameworkStores<BancoContext>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -52,7 +61,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //app.MapSwagger().RequireAuthorization();
-app.MapIdentityApi<IdentityUser>();
+//app.MapIdentityApi<IdentityUser>();
 
 app.UseAuthorization();
 

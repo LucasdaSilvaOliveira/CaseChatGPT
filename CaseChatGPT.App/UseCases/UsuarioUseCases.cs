@@ -1,4 +1,5 @@
 ﻿using CaseChatGPT.Domain.Entities;
+using CaseChatGPT.Domain.Interfaces.Repositories;
 using CaseChatGPT.Domain.Interfaces.UseCases;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace CaseChatGPT.App.UseCases
 {
     public class UsuarioUseCases : IUsuarioUseCases
     {
-        private readonly IUsuarioUseCases _usuarioUseCases;
-        public UsuarioUseCases(IUsuarioUseCases usuarioUseCases)
+        private readonly IUsuarioRepository _usuarioUseCases;
+        public UsuarioUseCases(IUsuarioRepository usuarioUseCases)
         {
             _usuarioUseCases = usuarioUseCases;
         }

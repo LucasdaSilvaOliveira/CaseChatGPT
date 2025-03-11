@@ -1,5 +1,6 @@
 ﻿using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Domain.Interfaces.Repositories;
+using CaseChatGPT.Infra.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +14,11 @@ namespace CaseChatGPT.Infra.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly UserManager<Usuario> _userManager;
-        public UsuarioRepository(UserManager<Usuario> userManager)
+        private readonly BancoContext _context;
+        public UsuarioRepository(UserManager<Usuario> userManager, BancoContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
         public async Task<IEnumerable<Usuario>> GetUsuarios()
         {
