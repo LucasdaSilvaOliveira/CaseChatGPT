@@ -61,12 +61,8 @@ namespace CaseChatGPT.Api.Controllers
         {
             try
             {
-                var produto = await _produtoUseCase.GetProdutoById(id);
+                var produto = _mapper.Map<Produto>(newProduto);
                 produto.Id = id;
-                produto.Nome = newProduto.Nome;
-                produto.Preco = newProduto.Preco;
-                produto.Descricao = newProduto.Descricao;
-                produto.Estoque = newProduto.Estoque;
 
                 _produtoUseCase.UpdateProduto(produto);
                 return Ok("Produto atualizado com sucesso!");
