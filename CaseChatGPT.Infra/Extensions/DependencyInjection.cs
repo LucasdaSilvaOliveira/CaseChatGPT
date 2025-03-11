@@ -23,6 +23,7 @@ namespace CaseChatGPT.Infra.Extensions
             // Registra o repositório como Scoped
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             return services;
         }
