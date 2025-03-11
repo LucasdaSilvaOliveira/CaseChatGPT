@@ -21,12 +21,15 @@ builder.Services.AddInfraDependencies(builder.Configuration);
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new ProdutoProfile());
+    mc.AddProfile(new PedidoProfile());
 });
+
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 // ==================
 
 builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
+builder.Services.AddScoped<IPedidoUseCases, PedidoUseCases>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
          .AddEntityFrameworkStores<BancoContext>()
