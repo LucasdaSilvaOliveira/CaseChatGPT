@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CaseChatGPT.Api.Controllers
 {
+    //[Authorize]
+    [ApiController]
     [Route("api/[controller]")]
     public class PedidoController : ControllerBase
     {

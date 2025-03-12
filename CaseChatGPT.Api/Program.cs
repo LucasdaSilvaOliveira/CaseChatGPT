@@ -5,7 +5,10 @@ using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Domain.Interfaces.UseCases;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,28 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// CONFIG JWT
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(jwtOptions =>
+{
+    jwtOptions.Authority = "https://localhost:7085/";
+    //jwtOptions.Audience = "https://localhost:7085/";
+
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuers = builder.Configuration.GetSection("jwt:secretkey").Get<string[]>(),
+        ValidAudiences = builder.Configuration.GetSection("jwt:audience").Get<string[]>(),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+            builder.Configuration.GetSection("jwt:secretKey").Get<string>()!)),
+        ClockSkew = TimeSpan.Zero
+    };
+});
+// ==================
 
 builder.Services.AddInfraDependencies(builder.Configuration);
 
