@@ -10,6 +10,6 @@ namespace CaseChatGPT.Domain.Entities
     public class Usuario : IdentityUser
     {
         public string NomeCompleto { get; set; }
-        public ICollection<Pedido> Pedidos { get; set; }
+        public ICollection<Pedido>? Pedidos { get; set; }
     }
 }

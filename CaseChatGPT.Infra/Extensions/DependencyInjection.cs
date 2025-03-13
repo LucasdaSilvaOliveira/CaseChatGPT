@@ -18,14 +18,9 @@ namespace CaseChatGPT.Infra.Extensions
     {
         public static IServiceCollection AddInfraDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            // Adiciona o DbContext ao DI
             services.AddDbContext<BancoContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-         //   services.AddIdentityCore<Usuario>()
-         //.AddEntityFrameworkStores<BancoContext>();
-
-            // Registra o repositório como Scoped
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();

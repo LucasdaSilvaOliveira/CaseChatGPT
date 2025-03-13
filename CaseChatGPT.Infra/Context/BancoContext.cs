@@ -17,5 +17,14 @@ namespace CaseChatGPT.Infra.Context
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Usuario>().HasDiscriminator<string>("Discriminator")
+                .HasValue<Usuario>("IdentityUser"); // Define o valor que será salvo na coluna
+        }
     }
+
 }

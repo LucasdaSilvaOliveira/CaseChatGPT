@@ -11,38 +11,38 @@ namespace CaseChatGPT.App.UseCases
 {
     public class UsuarioUseCases : IUsuarioUseCases
     {
-        private readonly IUsuarioRepository _usuarioUseCases;
+        private readonly IUsuarioRepository _usuarioRepository;
         public UsuarioUseCases(IUsuarioRepository usuarioUseCases)
         {
-            _usuarioUseCases = usuarioUseCases;
+            _usuarioRepository = usuarioUseCases;
         }
         public async Task<IEnumerable<Usuario>> GetUsuarios()
         {
-            var usuarios = await _usuarioUseCases.GetUsuarios();
+            var usuarios = await _usuarioRepository.GetUsuarios();
             return usuarios;
         }
 
         public async Task<Usuario> GetUsuarioById(string id)
         {
             if(string.IsNullOrEmpty(id)) throw new Exception("Id obrigatório");
-            var usuario = await _usuarioUseCases.GetUsuarioById(id);
+            var usuario = await _usuarioRepository.GetUsuarioById(id);
             if(usuario == null) throw new Exception("Usuário não encontrado");
             return usuario;
         }
 
         public async Task AddUsuario(Usuario usuario, string passwordDTO)
         {
-            await _usuarioUseCases.AddUsuario(usuario, passwordDTO);
+            await _usuarioRepository.AddUsuario(usuario, passwordDTO);
         }
 
         public async Task UpdateUsuario(Usuario usuario)
         {
-          await _usuarioUseCases.UpdateUsuario(usuario);
+          await _usuarioRepository.UpdateUsuario(usuario);
         }
 
         public async Task DeleteUsuario(Usuario usuario)
         {
-            await _usuarioUseCases.DeleteUsuario(usuario);
+            await _usuarioRepository.DeleteUsuario(usuario);
         }
 
     }

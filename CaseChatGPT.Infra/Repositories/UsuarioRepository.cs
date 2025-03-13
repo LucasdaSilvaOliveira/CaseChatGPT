@@ -35,8 +35,32 @@ namespace CaseChatGPT.Infra.Repositories
 
         public async Task AddUsuario(Usuario usuario, string passwordDTO)
         {
-            var result = await _userManager.CreateAsync(usuario, passwordDTO);
-            if(!result.Succeeded) throw new Exception("Erro ao criar usuário");
+            try
+            {
+
+                if (string.IsNullOrWhiteSpace(usuario.UserName))
+                {
+                    throw new ArgumentException("O UserName não pode ser nulo ou vazio.");
+                }
+
+                var existe = await _userManager.FindByNameAsync(usuario.UserName);
+                if (existe != null)
+                {
+                    throw new Exception("Esse nome de usuário já está em uso.");
+                }
+
+                var result = await _userManager.CreateAsync(usuario, passwordDTO);
+
+                if (!result.Succeeded)
+                {
+                    var errors = string.Join("; ", result.Errors.Select(e => $"{e.Code}: {e.Description}"));
+                    throw new Exception($"Erro ao criar usuário: {errors}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro inesperado ao criar usuário: {ex.Message}", ex);
+            }
         }
 
         public async Task DeleteUsuario(Usuario usuario)
