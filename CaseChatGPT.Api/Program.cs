@@ -1,7 +1,9 @@
 using AutoMapper;
 using CaseChatGPT.App.Mappings;
+using CaseChatGPT.App.Services;
 using CaseChatGPT.App.UseCases;
 using CaseChatGPT.Domain.Entities;
+using CaseChatGPT.Domain.Interfaces.Services;
 using CaseChatGPT.Domain.Interfaces.UseCases;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Extensions;
@@ -57,6 +59,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
 builder.Services.AddScoped<IPedidoUseCases, PedidoUseCases>();
 builder.Services.AddScoped<IUsuarioUseCases, UsuarioUseCases>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddIdentity<Usuario, IdentityRole>()
          .AddEntityFrameworkStores<BancoContext>()
