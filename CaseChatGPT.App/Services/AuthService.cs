@@ -22,15 +22,6 @@ namespace CaseChatGPT.App.Services
             _signInManager = signInManager;
         }
 
-        public async Task<Usuario> AuthenticateAsync(string email, string password)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, password))
-                return null; // Usuário ou senha inválidos
-
-            return user;
-        }
-
         public async Task<string> LoginAsync(string userName, string password)
         {
             var result = await _signInManager.PasswordSignInAsync(userName, password, false, true);
@@ -43,7 +34,7 @@ namespace CaseChatGPT.App.Services
             if (user == null)
                 throw new UnauthorizedAccessException("User not found!");
 
-            var token = await GenerateJwtToken(user); // Método para gerar o JWT
+            var token = await GenerateJwtToken(user);
 
             return token;
         }
