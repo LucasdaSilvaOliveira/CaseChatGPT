@@ -26,18 +26,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(jwtOptions =>
 {
-    jwtOptions.Authority = "https://localhost:7085/";
-    //jwtOptions.Audience = "https://localhost:7085/";
+    jwtOptions.Authority = "https://localhost:7085";
+    jwtOptions.Audience = "https://localhost:7085";
 
     jwtOptions.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuers = builder.Configuration.GetSection("jwt:secretkey").Get<string[]>(),
-        ValidAudiences = builder.Configuration.GetSection("jwt:audience").Get<string[]>(),
+        ValidIssuer = builder.Configuration.GetSection("jwt:issuer").Get<string>(),
+        ValidAudience = builder.Configuration.GetSection("jwt:audience").Get<string>(),
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            builder.Configuration.GetSection("jwt:secretKey").Get<string>()!)),
+            builder.Configuration.GetSection("jwt:secretkey").Get<string>()!)),
         ClockSkew = TimeSpan.Zero
     };
 });
@@ -91,6 +91,7 @@ app.UseHttpsRedirection();
 //app.MapSwagger().RequireAuthorization();
 //app.MapIdentityApi<IdentityUser>();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

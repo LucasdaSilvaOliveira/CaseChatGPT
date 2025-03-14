@@ -31,14 +31,14 @@ namespace CaseChatGPT.App.Services
             return user;
         }
 
-        public async Task<string> LoginAsync(string userName, string email, string password)
+        public async Task<string> LoginAsync(string userName, string password)
         {
             var result = await _signInManager.PasswordSignInAsync(userName, password, false, true);
 
             if (!result.Succeeded)
                 throw new UnauthorizedAccessException("Login failed!");
 
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(userName);
 
             if (user == null)
                 throw new UnauthorizedAccessException("User not found!");

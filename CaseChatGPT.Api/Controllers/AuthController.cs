@@ -23,7 +23,7 @@ namespace CaseChatGPT.Api.Controllers
         {
             try
             {
-                var token = await _authService.LoginAsync(request.UserName ,request.Email, request.Password);
+                var token = await _authService.LoginAsync(request.UserName, request.Password);
                 return Ok(new { Token = token });
             }
             catch (Exception ex)

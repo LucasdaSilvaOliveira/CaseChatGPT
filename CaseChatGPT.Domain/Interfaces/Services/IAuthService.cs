@@ -11,6 +11,6 @@ namespace CaseChatGPT.Domain.Interfaces.Services
     {
         Task<string> GenerateJwtToken(Usuario user);
         Task<Usuario> AuthenticateAsync(string email, string password);
-        Task<string> LoginAsync(string userName, string email, string password);
+        Task<string> LoginAsync(string userName, string password);
     }
 }
