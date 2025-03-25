@@ -1,12 +1,14 @@
 ﻿using CaseChatGPT.App.DTOs.Usuario;
 using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Domain.Interfaces.UseCases;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaseChatGPT.Api.Controllers
 {
-    //[Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
