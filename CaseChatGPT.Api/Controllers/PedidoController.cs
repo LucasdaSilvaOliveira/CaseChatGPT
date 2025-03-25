@@ -4,11 +4,13 @@ using CaseChatGPT.App.DTOs.Produto;
 using CaseChatGPT.App.UseCases;
 using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Domain.Interfaces.UseCases;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaseChatGPT.Api.Controllers
 {
-    //[Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
     public class PedidoController : ControllerBase

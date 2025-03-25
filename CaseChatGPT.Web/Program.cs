@@ -1,7 +1,7 @@
 using CaseChatGPT.Infra.Context;
+using CaseChatGPT.Web.Services.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,12 @@ builder.Services.AddDbContext<BancoContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BancoContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddHttpClient("ApiCase", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7085/api/");
+});
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
