@@ -20,8 +20,18 @@ namespace CaseChatGPT.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            await _authService.Login(model.UserName, model.Password);
-            return View("Index");
+            var loginRealizado = await _authService.Login(model.UserName, model.Password);
+
+            if(loginRealizado) return RedirectToAction("Index", "Home");
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ObterProdutos()
+        {
+            await _authService.ObterProdutos();
+            return View();
         }
     }
 }

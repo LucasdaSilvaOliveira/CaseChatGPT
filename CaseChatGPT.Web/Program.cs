@@ -15,7 +15,18 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
     .AddEntityFrameworkStores<BancoContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddHttpClient("ApiCase", client =>
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+string? httpClientName = builder.Configuration["HttpClientName"]!;
+
+builder.Services.AddHttpClient(httpClientName, client =>
 {
     client.BaseAddress = new Uri("https://localhost:7085/api/");
 });
@@ -38,6 +49,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
