@@ -26,12 +26,5 @@ namespace CaseChatGPT.Web.Controllers
 
             return View();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> ObterProdutos()
-        {
-            await _authService.ObterProdutos();
-            return View();
-        }
     }
 }

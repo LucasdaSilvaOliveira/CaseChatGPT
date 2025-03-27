@@ -73,8 +73,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.AllowedForNewUsers = true;
 });
 
-//builder.Services.AddIdentityApiEndpoints<Usuario>()
-
 var app = builder.Build();
 
 //    .AddEntityFrameworkStores<BancoContext>();
@@ -87,9 +85,6 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
-
-//app.MapSwagger().RequireAuthorization();
-//app.MapIdentityApi<IdentityUser>();
 
 app.UseAuthentication();
 app.UseAuthorization();

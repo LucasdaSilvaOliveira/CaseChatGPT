@@ -1,5 +1,8 @@
-﻿using System.Net.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace CaseChatGPT.Web.Services.Auth
@@ -16,29 +19,64 @@ namespace CaseChatGPT.Web.Services.Auth
             _httpContextAccessor = httpContextAccessor;
         }
 
+        //public async Task<bool> Login(string username, string password)
+        //{
+        //    string httpClientName = _configuration["HttpClientName"]!;
+
+        //    using HttpClient client = _httpClientFactory.CreateClient(httpClientName);
+
+        //    var response = await client.PostAsJsonAsync("Auth/Login", new { username, password });
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var content = await response.Content.ReadFromJsonAsync<TokenResponse>();
+        //        _httpContextAccessor.HttpContext.Session.SetString("AuthToken", content!.Token);
+        //        return true;
+        //    };
+
+        //    return false;
+        //}
+
         public async Task<bool> Login(string username, string password)
         {
             string httpClientName = _configuration["HttpClientName"]!;
-            
             using HttpClient client = _httpClientFactory.CreateClient(httpClientName);
 
             var response = await client.PostAsJsonAsync("Auth/Login", new { username, password });
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadFromJsonAsync<TokenResponse>();
-                _httpContextAccessor.HttpContext.Session.SetString("AuthToken", content!.Token);
-                return true;
+                return false; // Falha na autenticação
+            }
+
+            var content = await response.Content.ReadFromJsonAsync<TokenResponse>();
+            string token = content!.Token;
+
+            // Armazena o token na sessão
+            _httpContextAccessor.HttpContext.Session.SetString("AuthToken", token);
+
+            // Criar claims do usuário
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim("AuthToken", token) // Guarda o token como claim
             };
 
-            return false;
+            var identity = new ClaimsIdentity(claims, IdentityConstants.ApplicationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            // Autenticar o usuário na camada Web com Identity Cookies
+            await _httpContextAccessor.HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, principal);
+
+            return true;
         }
 
-        // MÉTODO TESTE
+
+        // ESSE MÉTODO VAI TER QUE SAIR DAQUI
         public async Task<bool> ObterProdutos()
         {
             string httpClientName = _configuration["HttpClientName"]!;
-            
+
             using HttpClient client = _httpClientFactory.CreateClient(httpClientName);
 
             // Recupera o token da sessão
