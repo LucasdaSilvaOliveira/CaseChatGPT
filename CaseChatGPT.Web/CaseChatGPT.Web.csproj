@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Produto\Detalhes.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
       <PrivateAssets>all</PrivateAssets>
@@ -23,6 +27,18 @@
     <ProjectReference Include="..\CaseChatGPT.Api\CaseChatGPT.Api.csproj" />
     <ProjectReference Include="..\CaseChatGPT.Domain\CaseChatGPT.Domain.csproj" />
     <ProjectReference Include="..\CaseChatGPT.Infra\CaseChatGPT.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Produto\Detalhes.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Produto\Detalhes.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Produto\Detalhes.cshtml" />
   </ItemGroup>
 
 </Project>
