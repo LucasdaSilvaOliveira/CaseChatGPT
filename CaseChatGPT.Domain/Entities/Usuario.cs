@@ -11,5 +11,6 @@ namespace CaseChatGPT.Domain.Entities
     {
         public string NomeCompleto { get; set; }
         public ICollection<Pedido>? Pedidos { get; set; }
+        public ICollection<Produto>? Produtos { get; set; }
     }
 }

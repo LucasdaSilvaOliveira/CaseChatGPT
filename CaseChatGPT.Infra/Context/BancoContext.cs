@@ -23,7 +23,7 @@ namespace CaseChatGPT.Infra.Context
             base.OnModelCreating(builder);
 
             builder.Entity<Usuario>().HasDiscriminator<string>("Discriminator")
-                .HasValue<Usuario>("IdentityUser"); // Define o valor que será salvo na coluna
+                .HasValue<Usuario>("Usuario"); // Define o valor que será salvo na coluna
         }
     }
 

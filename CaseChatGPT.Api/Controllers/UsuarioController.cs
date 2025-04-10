@@ -61,6 +61,7 @@ namespace CaseChatGPT.Api.Controllers
             }
         }
 
+        [AllowAnonymous]    
         [HttpPost]
         public async Task<IActionResult> CreateUsuario([FromBody] CriarUsuarioDTO usuarioDTO)
         {

@@ -19,24 +19,6 @@ namespace CaseChatGPT.Web.Services.Auth
             _httpContextAccessor = httpContextAccessor;
         }
 
-        //public async Task<bool> Login(string username, string password)
-        //{
-        //    string httpClientName = _configuration["HttpClientName"]!;
-
-        //    using HttpClient client = _httpClientFactory.CreateClient(httpClientName);
-
-        //    var response = await client.PostAsJsonAsync("Auth/Login", new { username, password });
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var content = await response.Content.ReadFromJsonAsync<TokenResponse>();
-        //        _httpContextAccessor.HttpContext.Session.SetString("AuthToken", content!.Token);
-        //        return true;
-        //    };
-
-        //    return false;
-        //}
-
         public async Task<bool> Login(string username, string password)
         {
             string httpClientName = _configuration["HttpClientName"]!;
