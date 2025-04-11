@@ -32,6 +32,14 @@ namespace CaseChatGPT.Infra.Repositories
             return produto;
         }
 
+        public async Task<IEnumerable<Produto>> GetProdutosByUserId(string userId)
+        {
+            var produto = await _context.Produtos.Where(p => p.UsuarioId == userId).ToListAsync();
+
+            if (produto == null) throw new Exception("Produto não encontrado");
+            return produto;
+        }
+
         public async Task<IEnumerable<Produto>> GetProdutos()
         {
             var produtos = await _context.Produtos.ToListAsync();

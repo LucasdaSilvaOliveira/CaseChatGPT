@@ -23,6 +23,12 @@ namespace CaseChatGPT.App.UseCases
             return produto;
         }
 
+        public Task<IEnumerable<Produto>> GetProdutosByUserId(string userId)
+        {
+            var produto = _produtoRepository.GetProdutosByUserId(userId);
+            return produto;
+        }
+
         public void AddProduto(Produto produto)
         {
             _produtoRepository.AddProduto(produto);

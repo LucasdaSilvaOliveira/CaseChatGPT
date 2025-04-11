@@ -36,7 +36,22 @@ namespace CaseChatGPT.Api.Controllers
             {
                 var produto = await _produtoUseCase.GetProdutoById(id);
                 var produtoDTO = _mapper.Map<ProdutoDTO>(produto);
-                return Ok(produto);
+                return Ok(produtoDTO);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("ProdutoPorUsuario/{userId}")]
+        public async Task<IActionResult> GetProdutoByNome(string userId)
+        {
+            try
+            {
+                var produtos = await _produtoUseCase.GetProdutosByUserId(userId);
+                var produtosDTO = _mapper.Map<List<ProdutoDTO>>(produtos);
+                return Ok(produtosDTO);
             }
             catch (Exception ex)
             {
