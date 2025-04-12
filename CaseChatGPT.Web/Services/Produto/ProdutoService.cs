@@ -74,6 +74,36 @@ namespace CaseChatGPT.Web.Services.Produto
             }
         }
 
+        public async Task<List<ObterProdutoDTO>> ObterProdutosPorUserId(string userId)
+        {
+
+            var httpClientName = _configuration["HttpClientName"]!;
+            var client = _httpClientFactory.CreateClient(httpClientName);
+            var token = _httpContextAccessor.HttpContext?.Session.GetString("AuthToken");
+            if (!string.IsNullOrEmpty(token))
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var response = await client.GetAsync($"Produto/ProdutoPorUsuario/{userId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var produtos = JsonSerializer.Deserialize<List<ObterProdutoDTO>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    return produtos;
+                }
+                else
+                {
+                    throw new Exception("Erro ao obter produtos.");
+                }
+            }
+            else
+            {
+                throw new Exception("Token de autenticação não obtido.");
+            }
+
+        }
+
         public async Task<bool> RemoverProduto(int id)
         {
             var hpptClientName = _configuration["HttpClientName"];

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Web.Models;
 using CaseChatGPT.Web.Services.Produto;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CaseChatGPT.Web.Controllers
 {
@@ -12,14 +14,18 @@ namespace CaseChatGPT.Web.Controllers
     {
         private readonly IProdutoService _produtoService;
         private readonly IMapper _mapper;
-        public ProdutoController(IProdutoService produtoService, IMapper mapper)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ProdutoController(IProdutoService produtoService, IMapper mapper, UserManager<IdentityUser> userManager)
         {
             _produtoService = produtoService;
             _mapper = mapper;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
-            var produtos = await _produtoService.ObterProdutos();
+            var userId = _userManager.GetUserId(User)!;
+
+            var produtos = await _produtoService.ObterProdutosPorUserId(userId);
 
             var model = _mapper.Map<List<ProdutoViewModel>>(produtos);
 
