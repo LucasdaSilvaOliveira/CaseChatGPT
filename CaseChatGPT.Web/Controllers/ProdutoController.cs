@@ -41,5 +41,12 @@ namespace CaseChatGPT.Web.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var produto = await _produtoService.ObterProdutoPorId(id);
+            var model = _mapper.Map<ProdutoViewModel>(produto);
+            return View(model);
+        }
     }
 }

@@ -26,7 +26,7 @@
                     <td>@produto.Descricao</td>
                     <td>R$ @produto.Preco.ToString("F2")</td>
                     <td>
-                        <a href="@Url.Action("Editar", "Produto", new { id = produto.Id })" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="@Url.Action("Edit", "Produto", new { id = produto.Id })" class="btn btn-sm btn-warning">Editar</a>
                         <a href="@Url.Action("Detalhes", "Produto", new { id = produto.Id })" class="btn btn-sm btn-info">Detalhes</a>
                         <a href="@Url.Action("Excluir", "Produto", new { id = produto.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este produto?');">Excluir</a>
                     </td>
