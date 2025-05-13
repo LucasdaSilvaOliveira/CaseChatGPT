@@ -166,9 +166,9 @@ namespace CaseChatGPT.Web.Services.Produto
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                var response = client.PutAsJsonAsync("Produto", produto);
+                var response = await client.PutAsJsonAsync("Produto", produto);
 
-                if (response.Result.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     return true;
                 }

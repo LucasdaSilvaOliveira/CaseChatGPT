@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using CaseChatGPT.App.DTOs.Produto;
 using CaseChatGPT.Domain.Entities;
+using CaseChatGPT.Web.DTOs.Produto;
 using CaseChatGPT.Web.Models;
 using CaseChatGPT.Web.Services.Produto;
 using Microsoft.AspNetCore.Authorization;
@@ -46,6 +48,21 @@ namespace CaseChatGPT.Web.Controllers
         {
             var produto = await _produtoService.ObterProdutoPorId(id);
             var model = _mapper.Map<ProdutoViewModel>(produto);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProdutoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var produtoDB = await _produtoService.ObterProdutoPorId(model.Id);
+                var produto = _mapper.Map<AtualizarProdutoDTO>(produtoDB);
+
+                await _produtoService.AtualizarProduto(produto);
+
+                return RedirectToAction("Index");
+            }
             return View(model);
         }
     }
