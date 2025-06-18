@@ -11,6 +11,7 @@ namespace CaseChatGPT.Web.AutoMapper
             CreateMap<ObterProdutoDTO, ProdutoViewModel>().ReverseMap();
             CreateMap<ObterProdutoDTO, AtualizarProdutoDTO>().ReverseMap();
             CreateMap<ProdutoViewModel, AtualizarProdutoDTO>().ReverseMap();
+            CreateMap<ProdutoViewModel, AdicionarProdutoDTO>().ReverseMap();
         }
     }
 }

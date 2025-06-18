@@ -65,5 +65,27 @@ namespace CaseChatGPT.Web.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Adicionar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Adicionar(ProdutoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = _userManager.GetUserId(User)!;
+
+                var produto = _mapper.Map<AdicionarProdutoDTO>(model);
+                produto.UserId = userId;
+
+                await _produtoService.AdicionarProduto(produto);
+
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }
