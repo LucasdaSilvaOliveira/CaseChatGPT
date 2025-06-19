@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
-using CaseChatGPT.App.DTOs.Produto;
-using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Web.DTOs.Produto;
-using CaseChatGPT.Web.Models;
 using CaseChatGPT.Web.Services.Produto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using CaseChatGPT.Web.Areas.Produto.Models;
 
-namespace CaseChatGPT.Web.Controllers
+namespace CaseChatGPT.Web.Areas.Controllers
 {
     [Authorize]
+    [Area("Produto")]
     public class ProdutoController : Controller
     {
         private readonly IProdutoService _produtoService;
@@ -72,18 +70,20 @@ namespace CaseChatGPT.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Adicionar(ProdutoViewModel model)
+        public async Task<IActionResult> Adicionar(AdicionarProdutoViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User)!;
 
                 var produto = _mapper.Map<AdicionarProdutoDTO>(model);
-                produto.UserId = userId;
+                produto.UsuarioId = userId;
 
                 await _produtoService.AdicionarProduto(produto);
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index", "Produto");
+                return RedirectToAction(nameof(Index), "Produto", new { area = "" });
+
             }
             return View(model);
         }

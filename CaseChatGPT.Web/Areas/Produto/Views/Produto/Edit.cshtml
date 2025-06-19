@@ -1,11 +1,18 @@
-﻿@model ProdutoViewModel
+﻿@model CaseChatGPT.Web.Areas.Produto.Models.ProdutoViewModel
+
 @{
-    ViewBag.Title = "Adicionar Produto";
+    ViewBag.Title = "Editar Produto";
 }
 
-<h2>Adicionar Produto</h2>
+<h2>Editar Produto</h2>
 
-<form asp-action="Adicionar" method="post" class="needs-validation" novalidate>
+<form asp-action="Edit" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">ID</label>
+        <input asp-for="Id" class="form-control" readonly />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+
     <div class="mb-3">
         <label asp-for="Nome" class="form-label">Nome</label>
         <input asp-for="Nome" class="form-control" />
@@ -24,12 +31,7 @@
         <span asp-validation-for="Preco" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        v class="mb-3">
-        <label asp-for="Estoque" class="form-label">Estoque</label>
-        <input asp-for="Estoque" class="form-control" type="number"/>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Criar</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href ="/Produto" class="btn btn-secondary">Cancelar</a>
+    <a asp-action="Index" class="btn btn-warning">Cancelar Errado</a>
 </form>

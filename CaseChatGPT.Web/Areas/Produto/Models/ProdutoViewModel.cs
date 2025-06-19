@@ -1,4 +1,4 @@
-﻿namespace CaseChatGPT.Web.Models
+﻿namespace CaseChatGPT.Web.Areas.Produto.Models
 {
     public class ProdutoViewModel
     {

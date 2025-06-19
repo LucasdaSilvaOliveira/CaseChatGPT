@@ -1,10 +1,10 @@
-﻿using CaseChatGPT.Domain.Entities;
-using CaseChatGPT.Web.Models;
+﻿using CaseChatGPT.Web.Areas.Login.Models;
 using CaseChatGPT.Web.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CaseChatGPT.Web.Controllers
+namespace CaseChatGPT.Web.Areas.Login.Controllers
 {
+    [Area("Login")]
     public class LoginController : Controller
     {
         private readonly IAuthService _authService;

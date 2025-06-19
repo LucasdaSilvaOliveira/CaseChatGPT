@@ -1,4 +1,4 @@
-﻿namespace CaseChatGPT.Web.Models
+﻿namespace CaseChatGPT.Web.Areas.Login.Models
 {
     public class LoginViewModel
     {

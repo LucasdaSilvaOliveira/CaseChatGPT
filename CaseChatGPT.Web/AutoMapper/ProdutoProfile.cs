@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CaseChatGPT.Web.DTOs.Produto;
-using CaseChatGPT.Web.Models;
+using CaseChatGPT.Web.Areas.Produto.Models;
 
 namespace CaseChatGPT.Web.AutoMapper
 {
@@ -12,6 +12,7 @@ namespace CaseChatGPT.Web.AutoMapper
             CreateMap<ObterProdutoDTO, AtualizarProdutoDTO>().ReverseMap();
             CreateMap<ProdutoViewModel, AtualizarProdutoDTO>().ReverseMap();
             CreateMap<ProdutoViewModel, AdicionarProdutoDTO>().ReverseMap();
+            CreateMap<AdicionarProdutoViewModel, AdicionarProdutoDTO>().ReverseMap();
         }
     }
 }
