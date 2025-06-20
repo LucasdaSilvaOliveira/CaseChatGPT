@@ -15,7 +15,7 @@ namespace CaseChatGPT.Infra.Repositories
 
         public void AddPedido(Pedido pedido)
         {
-            if(pedido == null ||
+            if (pedido == null ||
                 pedido.ProdutoId == 0 ||
                 pedido.UsuarioId == null) throw new Exception("Pedido não pode ser nulo");
 
@@ -25,7 +25,7 @@ namespace CaseChatGPT.Infra.Repositories
 
         public async Task<Pedido> GetPedidoById(int id)
         {
-            if(id == 0) throw new Exception("Problema no id do produto");
+            if (id == 0) throw new Exception("Problema no id do produto");
 
             var pedido = await _context.Pedidos.FindAsync(id);
             if (pedido == null) throw new Exception("Pedido não encontrado");
@@ -51,7 +51,7 @@ namespace CaseChatGPT.Infra.Repositories
         public void DeletePedido(int id)
         {
             var pedido = _context.Pedidos.Find(id);
-            if(pedido == null) throw new Exception("Pedido não encontrado");
+            if (pedido == null) throw new Exception("Pedido não encontrado");
             _context.Pedidos.Remove(pedido);
             _context.SaveChanges();
         }
