@@ -89,8 +89,7 @@ namespace CaseChatGPT.Web.Areas.Controllers
 
                 await _produtoService.AdicionarProduto(produto);
 
-                //return RedirectToAction("Index", "Produto");
-                return RedirectToAction(nameof(Index), "Produto", new { area = "" });
+                return RedirectToAction("Index", "Produto", new { area = "Produto" });
 
             }
             return View(model);
