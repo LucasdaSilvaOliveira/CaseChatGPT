@@ -61,37 +61,6 @@ namespace CaseChatGPT.Web.Services.Auth
             return true;
         }
 
-
-        // ESSE MÉTODO VAI TER QUE SAIR DAQUI
-        public async Task<bool> ObterProdutos()
-        {
-            string httpClientName = _configuration["HttpClientName"]!;
-
-            using HttpClient client = _httpClientFactory.CreateClient(httpClientName);
-
-            // Recupera o token da sessão
-            var token = _httpContextAccessor.HttpContext?.Session.GetString("AuthToken");
-
-            if (!string.IsNullOrEmpty(token))
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            }
-            else
-            {
-                return false; // Usuário não autenticado
-            }
-
-            var response = await client.GetAsync("Produto");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                return true;
-            };
-
-            return false;
-        }
-
         public class TokenResponse
         {
             public string Token { get; set; } = string.Empty;
