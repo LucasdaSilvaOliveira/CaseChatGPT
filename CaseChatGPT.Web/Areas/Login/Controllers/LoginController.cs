@@ -22,7 +22,7 @@ namespace CaseChatGPT.Web.Areas.Login.Controllers
         {
             var loginRealizado = await _authService.Login(model.UserName, model.Password);
 
-            if(loginRealizado) return RedirectToAction("Index", "Home");
+            if(loginRealizado) return RedirectToAction("Index", "Home", new { area = "" });
 
             return View();
         }

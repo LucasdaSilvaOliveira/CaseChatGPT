@@ -23,13 +23,21 @@ namespace CaseChatGPT.Web.Areas.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var userId = _userManager.GetUserId(User)!;
+            try
+            {
+                var userId = _userManager.GetUserId(User)!;
 
-            var produtos = await _produtoService.ObterProdutosPorUserId(userId);
+                var produtos = await _produtoService.ObterProdutosPorUserId(userId);
 
-            var model = _mapper.Map<List<ProdutoViewModel>>(produtos);
+                var model = _mapper.Map<List<ProdutoViewModel>>(produtos);
 
-            return View(model);
+                return View(model);
+
+            } catch
+            {
+                return RedirectToAction("Index", "Login", new { area = "Login" });
+            }
+         
 
         }
 
