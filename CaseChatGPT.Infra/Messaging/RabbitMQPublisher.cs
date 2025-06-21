@@ -6,7 +6,7 @@ namespace CaseChatGPT.Infra.Messaging
 {
     public class RabbitMQPublisher : IRabbitMQPublisher
     {
-        public async void Publish<T>(T message, string routingKey, string queue)
+        public async Task Publish<T>(T message, string routingKey, string queue)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
             using var connection = await factory.CreateConnectionAsync();
@@ -21,7 +21,6 @@ namespace CaseChatGPT.Infra.Messaging
             await channel.BasicPublishAsync(exchange: string.Empty, routingKey: routingKey, body: body);
             Console.WriteLine($" [x] Sent {message}");
             Console.WriteLine($"Message published with routing key '{routingKey}': {message}");
-            Console.ReadLine();
         }
     }
 }

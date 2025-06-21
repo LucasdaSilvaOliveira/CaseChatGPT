@@ -8,6 +8,6 @@ namespace CaseChatGPT.Infra.Messaging
 {
     public interface IRabbitMQConsumer
     {
-        void Consumer<T>(string queue);
+        Task Consumer<T>(string queue);
     }
 }

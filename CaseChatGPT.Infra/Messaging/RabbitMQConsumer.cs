@@ -6,7 +6,7 @@ namespace CaseChatGPT.Infra.Messaging
 {
     public class RabbitMQConsumer : IRabbitMQConsumer
     {
-        public async void Consumer<T>(string queue)
+        public async Task Consumer<T>(string queue)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
             using var connection = await factory.CreateConnectionAsync();
@@ -26,8 +26,7 @@ namespace CaseChatGPT.Infra.Messaging
 
             await channel.BasicConsumeAsync("hello", autoAck: true, consumer: consumer);
 
-            Console.WriteLine($" [*] Waiting for messages in {queue}. To exit press CTRL+C");
-            Console.ReadLine();
+            Console.WriteLine($" [*] Waiting for messages in {queue}.");
       
         }
     }

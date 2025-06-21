@@ -20,7 +20,7 @@ namespace CaseChatGPT.Infra.Messaging.RabbitMQService
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             using var scope = _serviceProvider.CreateScope();
-            var consumer = scope.ServiceProvider.GetRequiredService<RabbitMQConsumer>();
+            var consumer = scope.ServiceProvider.GetRequiredService<IRabbitMQConsumer>();
 
             consumer.Consumer<string>("new-product");
         }

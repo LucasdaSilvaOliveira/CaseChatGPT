@@ -8,6 +8,6 @@ namespace CaseChatGPT.Infra.Messaging
 {
     internal interface IRabbitMQPublisher
     {
-        void Publish<T>(T message, string routingKey, string queue);
+        Task Publish<T>(T message, string routingKey, string queue);
     }
 }
