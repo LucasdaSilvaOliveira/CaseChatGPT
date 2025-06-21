@@ -30,6 +30,7 @@ namespace CaseChatGPT.App.UseCases
         }
         public void AddPedido(Pedido pedido)
         {
+            // IMPLEMENTAR CHAMADA AO RABBITMQ AQUI
             _pedidoRepository.AddPedido(pedido);
         }
 
