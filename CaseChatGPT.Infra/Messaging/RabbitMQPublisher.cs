@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace CaseChatGPT.Infra.Messaging
 {
-    public class RabbitMQPublisher
+    public class RabbitMQPublisher : IRabbitMQPublisher
     {
         public async void Publish<T>(T message, string routingKey, string queue)
         {
