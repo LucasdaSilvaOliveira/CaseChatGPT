@@ -25,7 +25,7 @@ namespace CaseChatGPT.Infra.Messaging
                 return Task.CompletedTask;
             };
 
-            await channel.BasicConsumeAsync("hello", autoAck: true, consumer: consumer);
+            await channel.BasicConsumeAsync(queue, autoAck: true, consumer: consumer);
 
             Console.WriteLine($" [*] Waiting for messages in {queue}.");
       
