@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaseChatGPT.Infra.Messaging
+namespace CaseChatGPT.App.Interfaces.RabbitMQ
 {
-    internal interface IRabbitMQPublisher
+    public interface IRabbitMQPublisher
     {
         Task Publish<T>(T message, string routingKey, string queue);
     }

@@ -1,17 +1,13 @@
-﻿using CaseChatGPT.Domain.Entities;
+﻿using CaseChatGPT.App.Interfaces.RabbitMQ;
 using CaseChatGPT.Domain.Interfaces.Repositories;
 using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Infra.Messaging;
+using CaseChatGPT.Infra.Messaging.RabbitMQService;
 using CaseChatGPT.Infra.Repositories;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CaseChatGPT.Infra.Extensions
 {
@@ -26,8 +22,10 @@ namespace CaseChatGPT.Infra.Extensions
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-            services.AddScoped<IRabbitMQConsumer, RabbitMQConsumer >();
-            services.AddScoped<IRabbitMQPublisher, RabbitMQPublisher >();
+            services.AddScoped<IRabbitMQConsumer, RabbitMQConsumer>();
+            services.AddScoped<IRabbitMQPublisher, RabbitMQPublisher>();
+
+            services.AddHostedService<ProdutoConsumerService>();
 
             return services;
         }

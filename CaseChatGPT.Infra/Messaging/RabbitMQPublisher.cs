@@ -1,6 +1,7 @@
 ﻿using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
+using CaseChatGPT.App.Interfaces.RabbitMQ;
 
 namespace CaseChatGPT.Infra.Messaging
 {

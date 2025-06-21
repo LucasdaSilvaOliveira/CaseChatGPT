@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using CaseChatGPT.App.Interfaces.RabbitMQ;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 

@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CaseChatGPT.App\CaseChatGPT.App.csproj" />
     <ProjectReference Include="..\CaseChatGPT.Domain\CaseChatGPT.Domain.csproj" />
   </ItemGroup>
 

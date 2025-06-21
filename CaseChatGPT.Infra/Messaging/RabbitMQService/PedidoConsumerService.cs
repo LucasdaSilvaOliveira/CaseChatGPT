@@ -1,28 +1,31 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CaseChatGPT.App.Interfaces.RabbitMQ;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaseChatGPT.Infra.Messaging.RabbitMQService
 {
-    public class PedidoConsumerService : BackgroundService
+    public class ProdutoConsumerService : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public PedidoConsumerService(IServiceProvider serviceProvider)
+        public ProdutoConsumerService(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using var scope = _serviceProvider.CreateScope();
-            var consumer = scope.ServiceProvider.GetRequiredService<IRabbitMQConsumer>();
-
-            consumer.Consumer<string>("new-product");
+            try
+            {
+                using var scope = _serviceProvider.CreateScope();
+                var consumer = scope.ServiceProvider.GetRequiredService<IRabbitMQConsumer>();
+                await consumer.Consumer<string>("new-product");
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Erro ao consumir a fila: {ex.Message}");
+            }
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using CaseChatGPT.Domain.Entities;
+﻿using CaseChatGPT.App.Interfaces.RabbitMQ;
+using CaseChatGPT.Domain.Entities;
 using CaseChatGPT.Domain.Interfaces.Repositories;
 using CaseChatGPT.Domain.Interfaces.UseCases;
 
@@ -7,9 +8,11 @@ namespace CaseChatGPT.App.UseCases
     public class ProdutoUseCases : IProdutoUseCases
     {
         private readonly IProdutoRepository _produtoRepository;
-        public ProdutoUseCases(IProdutoRepository produtoRepository)
+        private readonly IRabbitMQPublisher _rabbitMQPublisher;
+        public ProdutoUseCases(IProdutoRepository produtoRepository, IRabbitMQPublisher rabbitMQPublisher)
         {
             _produtoRepository = produtoRepository;
+            _rabbitMQPublisher = rabbitMQPublisher;
         }
 
         public async Task<IEnumerable<Produto>> GetProdutos()
@@ -31,6 +34,8 @@ namespace CaseChatGPT.App.UseCases
 
         public void AddProduto(Produto produto)
         {
+            // IMPLEMENTAR CHAMADA AO RABBITMQ AQUI
+            _rabbitMQPublisher.Publish(produto, "product-key", "new-product");
             _produtoRepository.AddProduto(produto);
         }
 
