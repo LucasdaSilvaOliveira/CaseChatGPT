@@ -25,7 +25,7 @@ namespace CaseChatGPT.Infra.Extensions
             services.AddScoped<IRabbitMQConsumer, RabbitMQConsumer>();
             services.AddScoped<IRabbitMQPublisher, RabbitMQPublisher>();
 
-            services.AddHostedService<ProdutoConsumerService>();
+            //services.AddHostedService<ProdutoConsumerService>();
 
             return services;
         }
