@@ -62,9 +62,10 @@ namespace CaseChatGPT.Web.Areas.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User)!;
                 var produtoDB = await _produtoService.ObterProdutoPorId(model.Id);
                 var produto = _mapper.Map<AtualizarProdutoDTO>(produtoDB);
-
+                produto.UsuarioId = userId;
                 await _produtoService.AtualizarProduto(produto);
 
                 return RedirectToAction("Index");
@@ -83,7 +84,6 @@ namespace CaseChatGPT.Web.Areas.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User)!;
-
                 var produto = _mapper.Map<AdicionarProdutoDTO>(model);
                 produto.UsuarioId = userId;
 
