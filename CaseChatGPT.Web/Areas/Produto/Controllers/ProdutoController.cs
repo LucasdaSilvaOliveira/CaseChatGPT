@@ -64,6 +64,12 @@ namespace CaseChatGPT.Web.Areas.Controllers
             {
                 var userId = _userManager.GetUserId(User)!;
                 var produtoDB = await _produtoService.ObterProdutoPorId(model.Id);
+
+                produtoDB.Nome = model.Nome;
+                produtoDB.Descricao = model.Descricao;
+                produtoDB.Preco = model.Preco;
+                produtoDB.Estoque = model.Estoque;
+
                 var produto = _mapper.Map<AtualizarProdutoDTO>(produtoDB);
                 produto.UsuarioId = userId;
                 await _produtoService.AtualizarProduto(produto);
