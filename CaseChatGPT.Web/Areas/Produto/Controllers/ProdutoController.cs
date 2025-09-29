@@ -68,7 +68,7 @@ namespace CaseChatGPT.Web.Areas.Controllers
                 produto.UsuarioId = userId;
                 await _produtoService.AtualizarProduto(produto);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Produto", new { area = "Produto" });
             }
             return View(model);
         }
