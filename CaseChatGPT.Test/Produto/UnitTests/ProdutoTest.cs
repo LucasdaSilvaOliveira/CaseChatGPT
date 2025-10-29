@@ -11,24 +11,6 @@ namespace CaseChatGPT.Test.Produto.UnitTests
 {
     public class ProdutoTest
     {
-        //[Fact]
-        //public void TestaObterTodosProdutos()
-        //{
-        //    var mapperMoq = new Mock<IMapper>();
-        //    var produtoServiceMoq = new Mock<IProdutoUseCases>();
-
-        //    //produtoService.Setup(p => p.GetProdutos()).ReturnsAsync(new List<Domain.Entities.Produto>
-        //    //{
-        //    //    new Domain.Entities.Produto { Id = 1, Nome = "Produto 1", Descricao = "Descricao 1", Preco = 10.0m, UserId = "user1" },
-        //    //    new Domain.Entities.Produto { Id = 2, Nome = "Produto 2", Descricao = "Descricao 2", Preco = 20.0m, UserId = "user2" }
-        //    //});
-
-        //    var produtoAPI = new ProdutoController(produtoServiceMoq.Object, mapperMoq.Object);
-
-        //    var produtos = produtoAPI.Index();
-
-        //    Assert.NotNull(produtos);
-        //}
 
         [Fact]
         public async Task TestarUseCaseObterTodosProduto()
