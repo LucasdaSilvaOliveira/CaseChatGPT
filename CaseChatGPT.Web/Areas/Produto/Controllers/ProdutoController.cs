@@ -100,5 +100,11 @@ namespace CaseChatGPT.Web.Areas.Controllers
             }
             return View(model);
         }
+
+        public async Task<IActionResult> Excluir(int id)
+        {
+            await _produtoService.RemoverProduto(id);
+            return RedirectToAction("Index", "Produto", new { area = "Produto" });
+        }
     }
 }
