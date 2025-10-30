@@ -29,7 +29,7 @@ footer {
 
 main {
     padding: 40px;
-    width:100%;
+    width: 100%;
 }
 
 .main-container {
@@ -79,12 +79,29 @@ main {
     align-items: center;
 }
 
-#div-top-usuario h1 {
-    font-weight: bold;
+    #div-top-usuario h1 {
+        font-weight: bold;
+    }
+
+    #div-top-usuario p {
+        font-size: 18px;
+        font-weight: bold;
+        color: dimgrey;
+    }
+
+#div-search-usuario {
+    width: 100%;
 }
 
-#div-top-usuario p {
-    font-size: 18px;
-    font-weight: bold;
-    color: dimgrey;
-}
+    #div-search-usuario input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        padding-top:20px;
+        padding-bottom:20px;
+    }
+
+    #div-search-usuario input:focus {
+        border-color: #8080807c;
+        outline: none;
+    }
