@@ -2,14 +2,14 @@
 using CaseChatGPT.Web.Services.Usuario;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CaseChatGPT.Web.Areas.Dashboard.Controllers
+namespace CaseChatGPT.Web.Areas.Usuario.Controllers
 {
-    [Area("Dashboard")]
-    public class DashboardController : Controller
+    [Area("Usuario")]
+    public class UsuarioController : Controller
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
-        public DashboardController(IMapper mapper, IUsuarioService usuarioService)
+        public UsuarioController(IMapper mapper, IUsuarioService usuarioService)
         {
             _mapper = mapper;
             _usuarioService = usuarioService;

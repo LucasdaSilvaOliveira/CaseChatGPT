@@ -3,6 +3,7 @@ using CaseChatGPT.Infra.Context;
 using CaseChatGPT.Web.AutoMapper;
 using CaseChatGPT.Web.Services.Auth;
 using CaseChatGPT.Web.Services.Produto;
+using CaseChatGPT.Web.Services.Usuario;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -50,6 +51,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new ProdutoProfile());
+    mc.AddProfile(new UsuarioProfile());
 });
 
 IMapper mapper = mapperConfig.CreateMapper();
@@ -74,6 +76,7 @@ builder.Services.AddHttpClient(httpClientName, client =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 var app = builder.Build();
 

@@ -1,11 +1,11 @@
-html {
-    font-size: 14px;
-}
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
+}
+
+* {
+    font-family: "Material", sans-serif;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -15,11 +15,21 @@ html {
 html {
     position: relative;
     min-height: 100%;
+    font-size: 14px;
 }
 
 body {
     margin-bottom: 60px;
-    background-color: #bfbaba;
+    background-color: #e1dfdf;
+}
+
+footer {
+    background-color: white;
+}
+
+main {
+    padding: 40px;
+    width:100%;
 }
 
 .main-container {
@@ -33,27 +43,48 @@ body {
 }
 
     .ul-side-menu li {
-        display: flex;
-        justify-content: left;
-        align-items: center;
         text-decoration: none;
     }
 
-        .ul-side-menu li i {
-            width: 20px;
+        .ul-side-menu li a {
+            color: #373636;
         }
 
-        .ul-side-menu li a {
-            color: black;
-        }
+            .ul-side-menu li a i {
+                text-align: center;
+                margin-right: 10px;
+                width: 20px;
+            }
 
 
 .sidebar {
-    background-color:white;
-    width: 320px;
+    background-color: white;
+    width: 280px;
     min-height: 100vh;
 }
 
-footer {
-    background-color: white;
+    .sidebar h1 {
+        text-align: center;
+        font-size: 30px;
+        color: gray;
+        padding: 20px 0px;
+    }
+
+
+/*DIV USUARIO*/
+
+#div-top-usuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#div-top-usuario h1 {
+    font-weight: bold;
+}
+
+#div-top-usuario p {
+    font-size: 18px;
+    font-weight: bold;
+    color: dimgrey;
 }

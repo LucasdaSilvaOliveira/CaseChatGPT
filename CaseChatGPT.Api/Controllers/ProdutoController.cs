@@ -44,8 +44,8 @@ namespace CaseChatGPT.Api.Controllers
             }
         }
 
-        [HttpGet("ProdutoPorUsuario/{userId}")]
-        public async Task<IActionResult> GetProdutoByNome(string userId)
+        [HttpGet("ProdutosPorUsuario/{userId}")]
+        public async Task<IActionResult> GetProdutosByUserId(string userId)
         {
             try
             {
