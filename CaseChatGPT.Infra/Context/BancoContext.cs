@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace CaseChatGPT.Infra.Context
 {
-    public class BancoContext : IdentityDbContext<Usuario>
+    //public class BancoContext : IdentityDbContext<Usuario>
+    public class BancoContext : IdentityDbContext<IdentityUser>
     {
         public BancoContext(DbContextOptions<BancoContext> options) : base(options) { }
 
