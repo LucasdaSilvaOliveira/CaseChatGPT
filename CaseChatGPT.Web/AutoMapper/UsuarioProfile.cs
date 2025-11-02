@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CaseChatGPT.Web.Areas.Usuario.Models;
+using CaseChatGPT.Web.DTOs.Usuario;
 
 namespace CaseChatGPT.Web.AutoMapper
 {
@@ -6,7 +8,7 @@ namespace CaseChatGPT.Web.AutoMapper
     {
         public UsuarioProfile()
         {
-            // Adicione os mapeamentos relacionados ao usuário aqui
+            CreateMap<ObterUsuarioDTO, UsuarioViewModel>().ReverseMap();
         }
     }
 }

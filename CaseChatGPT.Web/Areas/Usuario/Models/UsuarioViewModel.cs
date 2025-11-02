@@ -1,6 +1,6 @@
-﻿namespace CaseChatGPT.Web.DTOs.Usuario
+﻿namespace CaseChatGPT.Web.Areas.Usuario.Models
 {
-    public class ObterUsuarioDTO
+    public class UsuarioViewModel
     {
         public string Id { get; set; }
         public string Nome { get; set; }

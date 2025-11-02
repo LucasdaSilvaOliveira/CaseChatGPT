@@ -28,7 +28,8 @@ namespace CaseChatGPT.Api.Controllers
             {
                 Id = usuario.Id,
                 Nome = usuario.NomeCompleto,
-                Email = usuario.Email!
+                Email = usuario.Email!,
+                UserName = usuario.UserName!
             }).ToList();
 
             return Ok(usuariosDTO);
