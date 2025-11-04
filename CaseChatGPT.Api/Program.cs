@@ -61,7 +61,7 @@ builder.Services.AddScoped<IPedidoUseCases, PedidoUseCases>();
 builder.Services.AddScoped<IUsuarioUseCases, UsuarioUseCases>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddIdentity<Usuario, IdentityRole>()
+builder.Services.AddIdentity<Usuario, Role>()
          .AddEntityFrameworkStores<BancoContext>()
          .AddDefaultTokenProviders();
 
