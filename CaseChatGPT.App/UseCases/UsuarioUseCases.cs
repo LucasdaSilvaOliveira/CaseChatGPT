@@ -24,9 +24,9 @@ namespace CaseChatGPT.App.UseCases
 
         public async Task<Usuario> GetUsuarioById(string id)
         {
-            if(string.IsNullOrEmpty(id)) throw new Exception("Id obrigatório");
+            if (string.IsNullOrEmpty(id)) throw new Exception("Id obrigatório");
             var usuario = await _usuarioRepository.GetUsuarioById(id);
-            if(usuario == null) throw new Exception("Usuário não encontrado");
+            if (usuario == null) throw new Exception("Usuário não encontrado");
             return usuario;
         }
 
@@ -37,7 +37,7 @@ namespace CaseChatGPT.App.UseCases
 
         public async Task UpdateUsuario(Usuario usuario)
         {
-          await _usuarioRepository.UpdateUsuario(usuario);
+            await _usuarioRepository.UpdateUsuario(usuario);
         }
 
         public async Task DeleteUsuario(Usuario usuario)
@@ -45,5 +45,11 @@ namespace CaseChatGPT.App.UseCases
             await _usuarioRepository.DeleteUsuario(usuario);
         }
 
+        public async Task<Role> GetRoleByUserId(string userId)
+        {
+            var role = await _usuarioRepository.GetRoleByUserAsync(userId);
+
+            return role;
+        }
     }
 }

@@ -124,5 +124,25 @@ namespace CaseChatGPT.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("role/{userId}")]
+        public async Task<IActionResult> GetRoleByUserId(string userId)
+        {
+            try
+            {
+                var role = await _usuarioUseCases.GetRoleByUserId(userId);
+
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(role);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

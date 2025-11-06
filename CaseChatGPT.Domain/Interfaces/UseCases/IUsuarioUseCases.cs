@@ -14,5 +14,6 @@ namespace CaseChatGPT.Domain.Interfaces.UseCases
         Task AddUsuario(Usuario usuario, string passwordDTO);
         Task UpdateUsuario(Usuario usuario);
         Task DeleteUsuario(Usuario usuario);
+        Task<Role> GetRoleByUserId(string userId);
     }
 }
