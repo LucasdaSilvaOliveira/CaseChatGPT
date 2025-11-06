@@ -14,11 +14,13 @@ namespace CaseChatGPT.Infra.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly UserManager<Usuario> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly BancoContext _context;
-        public UsuarioRepository(UserManager<Usuario> userManager, BancoContext context)
+        public UsuarioRepository(UserManager<Usuario> userManager, BancoContext context, RoleManager<Role> roleManager)
         {
             _userManager = userManager;
             _context = context;
+            _roleManager = roleManager;
         }
         public async Task<IEnumerable<Usuario>> GetUsuarios()
         {
@@ -73,6 +75,26 @@ namespace CaseChatGPT.Infra.Repositories
         {
             var result = await _userManager.UpdateAsync(usuario);
             if (!result.Succeeded) throw new Exception("Erro ao atualizar usuário");
+        }
+
+        public async Task<Role> GetRoleByUserAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            var role = await _roleManager.Roles
+                .Where(r => userRoles.Contains(r.Name))
+                .Select(r => new Role
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Description = r.Description,
+                    NormalizedName = r.NormalizedName,
+                    ConcurrencyStamp = r.ConcurrencyStamp
+                })
+                .FirstOrDefaultAsync();
+
+            return role;
         }
     }
 }

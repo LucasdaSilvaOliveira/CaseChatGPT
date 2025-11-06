@@ -9,5 +9,6 @@ namespace CaseChatGPT.Domain.Interfaces.Repositories
         Task AddUsuario(Usuario usuario, string passwordDTO);
         Task UpdateUsuario(Usuario usuario);
         Task DeleteUsuario(Usuario usuario);
+        Task<Role> GetRoleByUserAsync(string userId);
     }
 }
