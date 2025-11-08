@@ -23,6 +23,35 @@ namespace CaseChatGPT.Web.Areas.Usuario.Controllers
 
             var model = _mapper.Map<List<UsuarioViewModel>>(usuariosDTO);
 
+            foreach (var item in model)
+            {
+                var userRole = await _usuarioService.ObterRoleUsuarioPorId(item.Id);
+                if (userRole != null)
+                {
+                    item.RoleName = userRole.Name;
+                    item.RoleDescription = userRole.Description;
+
+                    switch (userRole.Name)
+                    {
+                        case "Admin":
+                            item.BadgeType = "bg-primary";
+                            break;
+                        case "User":
+                            item.BadgeType = "bg-secondary";
+                            break;  
+                        case "Guest":
+                            item.BadgeType = "bg-warning";
+                            break;  
+                        case "Manager":
+                            item.BadgeType = "bg-success";
+                            break;
+                        default:
+                            item.BadgeType = "bg-secondary";
+                            break;
+                    }
+                }
+            }
+
             return View(model);
         }
     }

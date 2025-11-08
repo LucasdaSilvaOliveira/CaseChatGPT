@@ -7,5 +7,6 @@ namespace CaseChatGPT.Web.Services.Usuario
         Task<List<ObterUsuarioDTO>> ObterUsuarios();
         Task<ObterUsuarioDTO> ObterUsuarioPorId(string id);
         Task<bool> RemoverUsuario(string id);
+        Task<ObterRoleUsuarioDTO> ObterRoleUsuarioPorId(string userId);
     }
 }

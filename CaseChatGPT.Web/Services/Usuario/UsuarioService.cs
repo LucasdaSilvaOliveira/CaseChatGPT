@@ -101,5 +101,33 @@ namespace CaseChatGPT.Web.Services.Usuario
                 throw new Exception("Token de autenticação não obtido.");
             }
         }
+
+        public Task<ObterRoleUsuarioDTO> ObterRoleUsuarioPorId(string userId)
+        {
+            var httpClientName = _configuration["HttpClientName"]!;
+            var client = _httpClientFactory.CreateClient(httpClientName);
+            var token = _httpContextAccessor.HttpContext?.Session.GetString("AuthToken");
+            if (!string.IsNullOrEmpty(token))
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var response = client.GetAsync($"Usuario/role/{userId}").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = response.Content.ReadAsStringAsync().Result;
+                    var role = JsonSerializer.Deserialize<ObterRoleUsuarioDTO>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    return Task.FromResult(role);
+                }
+                else
+                {
+                    throw new Exception("Erro ao obter role do usuário.");
+                }
+            }
+            else
+            {
+                throw new Exception("Token de autenticação não obtido.");
+            }
+        }
     }
 }
