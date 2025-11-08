@@ -23,6 +23,7 @@ namespace CaseChatGPT.Web.Areas.Usuario.Controllers
 
             var model = _mapper.Map<List<UsuarioViewModel>>(usuariosDTO);
 
+            // FERINDO PRINCÍPIOS SOLIDS, ABSTRAIR ESSA LÓGICA
             foreach (var item in model)
             {
                 var userRole = await _usuarioService.ObterRoleUsuarioPorId(item.Id);
