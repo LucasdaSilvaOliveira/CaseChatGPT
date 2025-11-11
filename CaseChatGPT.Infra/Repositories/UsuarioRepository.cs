@@ -24,7 +24,8 @@ namespace CaseChatGPT.Infra.Repositories
         }
         public async Task<IEnumerable<Usuario>> GetUsuarios()
         {
-            var usuarios = await _userManager.Users.ToListAsync();
+            var usuarios = await _userManager.Users
+                .ToListAsync();
             return usuarios;
         }
 
@@ -93,6 +94,8 @@ namespace CaseChatGPT.Infra.Repositories
                     ConcurrencyStamp = r.ConcurrencyStamp
                 })
                 .FirstOrDefaultAsync();
+
+            var breakP = false;
 
             return role;
         }
