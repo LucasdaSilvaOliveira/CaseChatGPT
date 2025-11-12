@@ -13,7 +13,7 @@ namespace CaseChatGPT.Domain.Interfaces.Repositories
         Task<IEnumerable<Role>> GetAllRoles();
         Task<Role> GetRoleById(string id);
         Task UpdateRole(Role role);
-        Task DeleteRole(Role role);
+        Task DeleteRole(string id);
         Task<Role> GetRoleByUserAsync(string userId);
     }
 }
