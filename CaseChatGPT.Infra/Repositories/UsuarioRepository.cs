@@ -77,7 +77,7 @@ namespace CaseChatGPT.Infra.Repositories
             var result = await _userManager.UpdateAsync(usuario);
             if (!result.Succeeded) throw new Exception("Erro ao atualizar usuário");
         }
-
+        // TALVEZ REMOVER ESSE MÉTODO DAQUI E COLOCAR NO RoleRepository
         public async Task<Role> GetRoleByUserAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
